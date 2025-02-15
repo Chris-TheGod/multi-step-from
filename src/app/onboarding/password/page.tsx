@@ -1,3 +1,5 @@
+import OnboardingPasswordForm from '@/features/onboarding/components/onboarding-password-form';
+
 export default function OnboardingPasswordPage() {
-  return <div>Name</div>;
+  return <OnboardingPasswordForm />;
 }

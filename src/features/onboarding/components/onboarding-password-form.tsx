@@ -18,29 +18,29 @@ import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { useOnboardingStore } from '@/app/onboarding/store';
 
-const onboardingNameSchema = onboardingSchema.pick({
-  firstName: true,
-  lastName: true,
+const onboardingPasswordSchema = onboardingSchema.pick({
+  password: true,
+  repeatPassword: true,
 });
 
-type OnboardingNameSchema = z.infer<typeof onboardingNameSchema>;
+type OnboardingPasswordSchema = z.infer<typeof onboardingPasswordSchema>;
 
-export default function OnboardingNameForm() {
+export default function OnboardingPasswordForm() {
   const router = useRouter();
 
   const setData = useOnboardingStore((state) => state.setData);
 
-  const form = useForm<OnboardingNameSchema>({
-    resolver: zodResolver(onboardingNameSchema),
+  const form = useForm<OnboardingPasswordSchema>({
+    resolver: zodResolver(onboardingPasswordSchema),
     defaultValues: {
-      firstName: '',
-      lastName: '',
+      password: '',
+      repeatPassword: '',
     },
   });
 
-  const onSubmit = (data: OnboardingNameSchema) => {
+  const onSubmit = (data: OnboardingPasswordSchema) => {
     setData(data);
-    router.push('/onboarding/password');
+    router.push('/onboarding/username');
   };
 
   return (
@@ -51,28 +51,30 @@ export default function OnboardingNameForm() {
       >
         <FormField
           control={form.control}
-          name='firstName'
+          name='password'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>First Name</FormLabel>
+              <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder='John' {...field} />
+                <Input placeholder='***********' {...field} type='password' />
               </FormControl>
-              <FormDescription>This is your first name.</FormDescription>
+              <FormDescription>This is your password.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
         <FormField
           control={form.control}
-          name='lastName'
+          name='repeatPassword'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Last Name</FormLabel>
+              <FormLabel>Confirm Password</FormLabel>
               <FormControl>
-                <Input placeholder='Doe' {...field} />
+                <Input placeholder='***********' {...field} type='password' />
               </FormControl>
-              <FormDescription>This is your last name.</FormDescription>
+              <FormDescription>
+                This is your password confirmation.
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
