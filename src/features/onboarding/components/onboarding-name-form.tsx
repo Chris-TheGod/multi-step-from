@@ -1,3 +1,5 @@
+'use client';
+
 import { useForm } from 'react-hook-form';
 import { onboardingSchema } from '../schema';
 import { z } from 'zod';
